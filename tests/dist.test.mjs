@@ -27,6 +27,7 @@ const REQUIRED_HEADINGS = {
     '## Status',
     '## Discovery',
     '## Before you finish',
+    '## Visual directions',
   ],
   'design-plan': ['## Budget modes', '## The Spec', '## If there is no Spec', '## Status', '## Before you finish'],
   'design-build': [
@@ -39,8 +40,16 @@ const REQUIRED_HEADINGS = {
     '## Components rules',
     '## Views rules',
     '## Motion rules',
+    '## Anti-generic rubric',
   ],
-  'design-review': ['## Budget modes', '## The Spec', '## If there is no Spec', '## Status', '## Before you finish'],
+  'design-review': [
+    '## Budget modes',
+    '## The Spec',
+    '## If there is no Spec',
+    '## Status',
+    '## Before you finish',
+    '## Anti-generic rubric',
+  ],
   'build-tokens': ['## Discovery', '## Budget modes', '## Before you finish', '## Tokens rules', '### Procedure'],
   'build-components': [
     '## Discovery',
