@@ -9,7 +9,7 @@ Run every step of the Plan in the Spec, verify each one, and report once. Never 
 
 <!-- include: partials/spec-format.md -->
 
-<!-- include: partials/credit-modes.md -->
+<!-- include: partials/credit-modes.compact.md -->
 
 ## Refuse unless Planned
 

@@ -7,7 +7,6 @@
 - Bind fill, stroke, padding, radius, and gap to a variable whenever a matching token exists.
 - Write a description on every component set.
 - Lay variants out in a grid. Never stack them at the same position.
-- Modify an existing asset only when the Spec lists it under Existing assets → in scope for change.
 
 ### Verify
 

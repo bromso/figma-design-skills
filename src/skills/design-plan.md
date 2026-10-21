@@ -9,7 +9,7 @@ Turn an approved Spec into an ordered build plan with verification built in. Thi
 
 <!-- include: partials/spec-format.md -->
 
-<!-- include: partials/credit-modes.md -->
+<!-- include: partials/credit-modes.compact.md -->
 
 ## Refuse unless Approved
 

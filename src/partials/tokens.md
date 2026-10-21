@@ -6,7 +6,6 @@
 - Scope every variable to where it applies. Never leave a variable set to all scopes.
 - Name variables with slashes: `color/bg/primary`, `spacing/md`, `radius/sm`.
 - Create a text style or effect style for any role that repeats.
-- Modify an existing asset only when the Spec lists it under Existing assets → in scope for change.
 
 ### Verify
 

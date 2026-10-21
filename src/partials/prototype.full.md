@@ -7,7 +7,6 @@ Pending: the Figma agent does not support prototyping and interactions yet.
 - Use smart animate between layers that match by name and structure.
 - Use an overlay for any dialog or modal.
 - Since this capability is unsupported today, record the intent in the Spec instead of attempting it.
-- Modify an existing asset only when the Spec lists it under Existing assets → in scope for change.
 
 ### Verify
 

@@ -5,7 +5,6 @@
 - Keep micro-interaction durations between 100 and 300 ms. Ease out on entrances, ease in on exits.
 - Reuse one animation style across components instead of redefining it each time.
 - Never animate a top-level frame.
-- Modify an existing asset only when the Spec lists it under Existing assets → in scope for change.
 
 ### Verify
 

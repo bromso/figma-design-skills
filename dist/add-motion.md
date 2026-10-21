@@ -15,7 +15,7 @@ Build only the interactions the user named. Never promote the request into anima
 
 If the request is clearly a project — motion across many components and flows, or anything that needs more than about five steps — say so in one line and suggest `/design-brief` instead, then stop.
 
-If the file has no Spec, use Budget mode `Standard` unless the user says otherwise; Discovery below still runs against the file, but there is no Spec section to write the result into, so just use it for this run. If a Spec exists and its Status is `Built` or `Building`, read Budget and Existing assets from it, and follow the existing-assets rule in Motion rules below.
+If the file has no Spec, use Budget mode `Standard` unless the user says otherwise; Discovery below still runs against the file, but there is no Spec section to write the result into, so just use it for this run. If a Spec exists and its Status is `Built` or `Building`, read Budget and Existing assets from it.
 
 If the request is ambiguous, ask once, in one message, before creating or changing anything. Never ask a question once building has started.
 
@@ -39,25 +39,13 @@ Write the result into the Spec's Discovery section as soon as it's gathered, so 
 
 ## Budget modes
 
-Credits are the user's scarce resource on every run. Follow five principles, in priority order:
-
-1. Prefer fewer runs over shorter ones. Batch work into as few prompts as the task allows, and never ask the user to send another prompt for something this run can finish.
-2. Front-load intent. Ask enough up front to avoid an expensive fix-it run after a wrong build.
-3. Discover once, record it. Do file and library discovery in `/design-brief` and read it back from the Spec afterward; never re-scan.
-4. Scale verification to the budget. Structural checks are cheap; screenshots and re-render loops are not.
-5. Say what things cost. End with a one-line estimate of what the next command is likely to cost.
-
-`/design-brief` asks which mode applies and records it in the Spec as `Budget: Lean | Standard | Generous`. Every later command reads the Budget from the Spec instead of asking again.
-
 | Mode | Review findings | Fix passes per step | Screenshots | Brief question rounds |
 |---|---|---|---|---|
 | Lean | 5 | 1 | one at the end | ≤3 per message |
 | Standard | 10 | 1 | one per composed screen | ≤3 per message |
 | Generous | 15 | 2 | one per composed screen | 1 per message if instructions persist |
 
-Lean suits a Starter seat or a Dev/Collab/View seat (500 credits a month, capped at 150 a day): split the plan so no single run is larger than medium. Standard suits a Professional Full seat. Generous suits an Organization or Enterprise seat, or purchased credits.
-
-Default is Standard when the user doesn't know. Fold the budget question into the brief's first round; never spend a run just to ask about it.
+Default is Standard when the user doesn't know.
 
 
 ## Motion rules
@@ -67,7 +55,6 @@ Default is Standard when the user doesn't know. Fold the budget question into th
 - Keep micro-interaction durations between 100 and 300 ms. Ease out on entrances, ease in on exits.
 - Reuse one animation style across components instead of redefining it each time.
 - Never animate a top-level frame.
-- Modify an existing asset only when the Spec lists it under Existing assets → in scope for change.
 
 ### Verify
 
@@ -98,15 +85,8 @@ Default is Standard when the user doesn't know. Fold the budget question into th
 
 Send one message when the work is done: the interactions and animation styles created or changed, by name; what was verified and how (the checks above, plus any screenshot read); and anything left undone and why.
 
-There is no Plan to size a next run from here, so skip the size shape in Before you finish below; close with exactly this line instead:
-
-`Next: run /design-review to check it, or /design-brief for a larger piece of work.`
-
 ## Before you finish
 
-Close with one short summary line, then a hand-off line in this exact shape:
+Close with one short summary line, then exactly this line:
 
-`Next: run /<command>. Expect a <small|medium|large> run.`
-
-Never ask the user to send a second prompt for work this run can finish; only hand off to the next command when the task genuinely requires a new run.
-
+`Next: run /design-review to check it, or /design-brief for a larger piece of work.`

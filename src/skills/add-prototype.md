@@ -19,7 +19,7 @@ If the request is ambiguous, ask once, in one message, before writing anything.
 
 <!-- include: partials/discovery.md -->
 
-<!-- include: partials/credit-modes.md -->
+<!-- include: partials/credit-modes.compact.md -->
 
 <!-- include: partials/prototype.full.md -->
 
@@ -27,8 +27,8 @@ If the request is ambiguous, ask once, in one message, before writing anything.
 
 Send one message when the work is done: where the intent was recorded (the Spec's Flows section, or the text frame's name); which flows, triggers, and transitions were recorded; and anything left undone and why.
 
-There is no Plan to size a next run from here, so skip the size shape in Before you finish below; close with exactly this line instead:
+## Before you finish
 
-`Next: run /design-review to check it, or /design-brief for a larger piece of work.`
+Close with one short summary line, then exactly this line:
 
-<!-- include: partials/handoff.md -->
+`Next: run /design-brief when you want this built.`

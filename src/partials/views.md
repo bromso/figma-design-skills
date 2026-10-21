@@ -7,7 +7,6 @@
 - Pull type scale and spacing from tokens, not arbitrary values.
 - Build the breakpoints the Spec lists, no others.
 - Build every empty, loading, and error state the Spec lists.
-- Modify an existing asset only when the Spec lists it under Existing assets → in scope for change.
 
 ### Verify
 

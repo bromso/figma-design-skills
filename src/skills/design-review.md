@@ -9,7 +9,7 @@ Review the work against its Spec when one applies, always against the anti-gener
 
 <!-- include: partials/spec-format.md -->
 
-<!-- include: partials/credit-modes.md -->
+<!-- include: partials/credit-modes.compact.md -->
 
 ## Read-only
 
