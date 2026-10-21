@@ -3,7 +3,7 @@
 ### Procedure
 
 1. Run discovery (see Discovery) before composing.
-2. Confirm the tokens and components each screen needs already exist.
+2. Confirm the tokens and components each screen needs already exist. If one or two are missing, stop and say which ones, then suggest `/build-tokens` or `/build-components`; if several are missing, suggest `/design-brief` instead. Never improvise with ad-hoc fills.
 3. Compose each screen from instances with auto layout, real content, and one hero element.
 4. Build every breakpoint and state the Spec lists.
 5. Verify against the checks above; fix any failure before continuing.

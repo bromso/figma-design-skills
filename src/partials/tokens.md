@@ -10,7 +10,7 @@
 
 ### Verify
 
-- Collection and mode names match the Spec.
-- Variable counts match the Spec's Foundations section.
+- Collection and mode names match the Spec if one exists, otherwise the user's request.
+- Variable counts match the Spec's Foundations section if one exists, otherwise the user's request.
 - Every alias resolves in each mode.
 - No variable is left unscoped.

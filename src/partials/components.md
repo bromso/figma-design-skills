@@ -12,7 +12,7 @@
 ### Verify
 
 - Variant count equals the planned matrix.
-- Every variant property from the Spec is present.
+- Every variant property matches the Spec if one exists, otherwise the user's request.
 - Bindable properties are bound, not hard-coded.
 - The component set has a description.
 - No two variants occupy the same position.
