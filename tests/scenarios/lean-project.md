@@ -30,7 +30,7 @@ Lean
 - [ ] `/design-build` takes exactly one screenshot, after the last step of the run, not one per composed screen
 - [ ] `/design-build` caps fix passes at one per step
 - [ ] `/design-review` pins at most five finding cards
-- [ ] Every hand-off line sizes the next run as small or medium, never large
+- [ ] `/design-plan` and each `/design-build` run hand off the next build run as small or medium; the review hand-off is sized by the total number of `done` steps
 
 ## Baseline (without skill)
 

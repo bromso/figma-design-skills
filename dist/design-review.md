@@ -42,13 +42,13 @@ Status moves through five states, each set by one command:
 - `Approved` — set by `/design-brief` once the user types `/design-brief continue approved`.
 - `Planned` — set by `/design-plan` (or directly by `/design-brief` for a small change that skips it).
 - `Building` — set by `/design-build` mid-run, so a second prompt resumes cleanly.
-- `Built` — set by `/design-build` once every step is done or blocked.
+- `Built` — set by `/design-build` once every step is done, blocked, or skipped.
 
 `/design-review` reads a `Built` Spec; it never changes Status.
 
 ## If there is no Spec
 
-If no Spec can be found for this request, say so: no Spec was found in this file. Ask the user to run `/design-brief`. Do not build.
+When this command needs an existing Spec and none is found in the file, say so: no Spec was found in this file. Ask the user to run `/design-brief`. Do not build.
 
 
 ## Budget modes
@@ -149,7 +149,7 @@ End with a one-line summary: cards per severity, and whether a fix pass ran.
 
 ## Before you finish
 
-Close with one short summary line, then a hand-off line in this exact shape:
+On the command's final message only; never append a Next line to an interview or clarifying message. Close with one short summary line, then a hand-off line in this exact shape:
 
 `Next: run /<command>. Expect a <small|medium|large> run.`
 

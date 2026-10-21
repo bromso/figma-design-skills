@@ -10,4 +10,4 @@ Record the mode in the Spec as `Budget: Lean | Standard | Generous`; every later
 | Standard | 10 | 1 | one per composed screen | ≤3 per message |
 | Generous | 15 | 2 | one per composed screen | 1 per message if instructions persist |
 
-Lean suits a Starter or Dev/Collab/View seat (500 credits a month, 150 a day). Standard suits a Professional Full seat. Generous suits an Organization or Enterprise seat, or purchased credits. Default is Standard when the user doesn't know. Fold the budget question into the first round; never spend a run just to ask about it.
+Lean suits a Starter or Dev/Collab/View seat (500 credits a month, 150 a day). Standard suits a Professional Full seat. Generous suits an Organization or Enterprise seat, or purchased credits. Default is Standard when the user doesn't know. Never spend a run just to ask about the budget.

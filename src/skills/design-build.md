@@ -33,7 +33,7 @@ If one exists, act on its Status:
 For each step:
 
 - **Lean and `optional`:** do not build it; log it `skipped` with `verify: not run (optional in Lean)`.
-- **Depends on a blocked step:** if its inputs name an asset a `blocked` step was meant to create, do not build it; log it `blocked` with `verify: not run (depends on step N)`. Continue with steps that do not depend on it.
+- **Depends on a blocked or skipped step:** a step whose inputs come from a blocked or skipped step is blocked; do not build it; log it `blocked` with `verify: not run (depends on step N)`. Continue with steps that do not depend on it.
 - **Existing assets:** create new nodes, variables, and styles freely. Modify or delete an existing node, variable, or style only when the Spec's Existing assets section lists it under in scope for change; treat everything else as read-only. If a step cannot be done without changing an unlisted asset, do not change it; log the step `blocked` with `verify: not run (would change <asset>, not in scope for change)`.
 - **Motion:** before the first motion step, check that motion is available. If it is not, log each motion step `blocked` with `verify: not run (motion not enabled on this account)` and continue; do not stop the run.
 - **Build** the step with the matching domain rules below (Tokens, Components, Views, or Motion rules) and the inputs it names.

@@ -42,13 +42,13 @@ Status moves through five states, each set by one command:
 - `Approved` — set by `/design-brief` once the user types `/design-brief continue approved`.
 - `Planned` — set by `/design-plan` (or directly by `/design-brief` for a small change that skips it).
 - `Building` — set by `/design-build` mid-run, so a second prompt resumes cleanly.
-- `Built` — set by `/design-build` once every step is done or blocked.
+- `Built` — set by `/design-build` once every step is done, blocked, or skipped.
 
 `/design-review` reads a `Built` Spec; it never changes Status.
 
 ## If there is no Spec
 
-If no Spec can be found for this request, say so: no Spec was found in this file. Ask the user to run `/design-brief`. Do not build.
+When this command needs an existing Spec and none is found in the file, say so: no Spec was found in this file. Ask the user to run `/design-brief`. Do not build.
 
 
 ## Budget modes
@@ -84,7 +84,7 @@ If one exists, act on its Status:
 For each step:
 
 - **Lean and `optional`:** do not build it; log it `skipped` with `verify: not run (optional in Lean)`.
-- **Depends on a blocked step:** if its inputs name an asset a `blocked` step was meant to create, do not build it; log it `blocked` with `verify: not run (depends on step N)`. Continue with steps that do not depend on it.
+- **Depends on a blocked or skipped step:** a step whose inputs come from a blocked or skipped step is blocked; do not build it; log it `blocked` with `verify: not run (depends on step N)`. Continue with steps that do not depend on it.
 - **Existing assets:** create new nodes, variables, and styles freely. Modify or delete an existing node, variable, or style only when the Spec's Existing assets section lists it under in scope for change; treat everything else as read-only. If a step cannot be done without changing an unlisted asset, do not change it; log the step `blocked` with `verify: not run (would change <asset>, not in scope for change)`.
 - **Motion:** before the first motion step, check that motion is available. If it is not, log each motion step `blocked` with `verify: not run (motion not enabled on this account)` and continue; do not stop the run.
 - **Build** the step with the matching domain rules below (Tokens, Components, Views, or Motion rules) and the inputs it names.
@@ -235,7 +235,7 @@ Then hand off (Before you finish):
 
 ## Before you finish
 
-Close with one short summary line, then a hand-off line in this exact shape:
+On the command's final message only; never append a Next line to an interview or clarifying message. Close with one short summary line, then a hand-off line in this exact shape:
 
 `Next: run /<command>. Expect a <small|medium|large> run.`
 

@@ -18,13 +18,13 @@ For each direction you propose, ground it in the subject and name a pairing, a p
 | Display | Text | Fits | Why |
 |---|---|---|---|
 | Instrument Serif | Instrument Sans | Editorial | sharp headlines, matched sans |
-| DM Serif Display | DM Sans | Editorial, warm brands | classic contrast, shared proportions |
-| Hanken Grotesk | IBM Plex Mono | Swiss grid | neutral grotesk, mono for labels |
+| DM Serif Display | DM Sans | Editorial, warm brands | classic contrast |
+| Hanken Grotesk | IBM Plex Mono | Swiss grid | mono for labels |
 | IBM Plex Sans | IBM Plex Mono | Dense pro tool | tabular figures, one superfamily |
 | Space Grotesk | Space Mono | Brutalist | quirky terminals, honest mono |
 | Nunito | Nunito Sans | Soft and rounded | round display, steady body |
-| Bricolage Grotesque | Figtree | Playful | characterful display, friendly text |
-| Cormorant Garamond | Jost | Luxury minimal | fine serif, geometric restraint |
+| Bricolage Grotesque | Figtree | Playful | characterful, friendly |
+| Cormorant Garamond | Jost | Luxury minimal | fine serif, restraint |
 | Sora | Manrope | Glass | wide geometric, legible small |
 | Fraunces | Work Sans | food, craft, retail | soft serif with personality |
 
@@ -33,11 +33,11 @@ For each direction you propose, ground it in the subject and name a pairing, a p
 | Archetype | Primary light / dark | Neutral | Accent | Light bg / surface / text | Dark bg / surface / text |
 |---|---|---|---|---|---|
 | Ink and paper | #1F2A44 / #9FB3E0 | #6B6660 | #C2410C | #FAF7F2 / #FFFFFF / #1C1917 | #151413 / #1F1D1B / #EDE8E0 |
-| Signal | #111111 / #F5F5F5 | #8A8A8A | #E4002B | #FFFFFF / #F2F2F2 / #111111 | #0A0A0A / #1A1A1A / #F5F5F5 |
-| Calm clinical | #2F6F5E / #6FC2A8 | #7A8580 | #F2A65A | #F6F8F7 / #FFFFFF / #1E2A26 | #121816 / #1B2320 / #E6EEEA |
+| Signal | #111111 / #F5F5F5 | #6D6D6D | #E4002B | #FFFFFF / #F2F2F2 / #111111 | #0A0A0A / #1A1A1A / #F5F5F5 |
+| Calm clinical | #2F6F5E / #6FC2A8 | #69726E | #F2A65A | #F6F8F7 / #FFFFFF / #1E2A26 | #121816 / #1B2320 / #E6EEEA |
 | Slate pro | #2F5BD3 / #7C9CFF | #687083 | #0FA3A3 | #F7F8FA / #FFFFFF / #11151C | #0E1116 / #161B22 / #E6E9EF |
 | Pop | #6C3BF5 / #A98BFF | #6F6A80 | #FFC531 | #FFFBF2 / #FFFFFF / #1D1838 | #16132A / #221D3D / #F4F1FF |
-| Noir and brass | #0E0E0E / #EAE4DA | #8C857B | #B08D57 | #F4F1EC / #FBFAF7 / #141414 | #0B0B0B / #161514 / #EAE4DA |
+| Noir and brass | #0E0E0E / #EAE4DA | #726C64 | #B08D57 | #F4F1EC / #FBFAF7 / #141414 | #0B0B0B / #161514 / #EAE4DA |
 
 Status roles, light / dark: success #15803D / #4ADE80, warning #B45309 / #FBBF24, danger #B91C1C / #F87171, info uses primary.
 

@@ -1,6 +1,6 @@
 ## Before you finish
 
-Close with one short summary line, then a hand-off line in this exact shape:
+On the command's final message only; never append a Next line to an interview or clarifying message. Close with one short summary line, then a hand-off line in this exact shape:
 
 `Next: run /<command>. Expect a <small|medium|large> run.`
 

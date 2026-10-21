@@ -52,7 +52,7 @@ Ground to cover. This is territory, not a script; skip what the user or Discover
 - States, variants, breakpoints, real content, and edge cases (empty, error, loading).
 - Flows: which screens connect and how, for motion now and prototyping later.
 - Motion: where it adds meaning and how it should feel.
-- Visual direction, required for every size. Settle mood, typefaces, palette, density, hero element, and what it must not look like. If Discovery found an empty file, propose two or three concrete directions from Visual directions below and let the user pick one. If Discovery found a design system, flex within it: choose which of its variables, styles, and components carry the direction, and name what to avoid. Never leave this section blank.
+- Visual direction, required for every size: mood, typefaces, palette, density, hero element, and what it must not look like. Empty file: propose two or three directions from Visual directions below; the user picks one. Screens but no design system: propose two or three from the table that fit what is already there. A design system: flex within it, choosing which of its variables, styles, and components carry the direction, and name what to avoid. Never leave this section blank.
 - Existing assets in scope for change. List every existing node, variable, style, or component the build may modify, and settle each fork here: code vs. Figma conflicts, close-but-not-exact library matches, extending an existing component vs. a new one. Record each decision. Anything not listed is read-only during the build.
 
 If the user wants to see a direction before choosing, offer a spike. Build it only after a yes, name its frame `Spike — <topic>`, and note in the Spec that it is throwaway.
