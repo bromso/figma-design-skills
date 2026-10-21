@@ -55,6 +55,10 @@ const REQUIRED_HEADINGS = {
     '## Views rules',
     '## Motion rules',
     '## Anti-generic rubric',
+    '## Refuse unless Planned',
+    '## Run the plan',
+    '## Build log',
+    '## Report',
   ],
   'design-review': [
     '## Budget modes',
