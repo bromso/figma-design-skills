@@ -79,6 +79,8 @@ If the user wants to see a direction before choosing, offer a spike. Build it on
 
 ## Discovery
 
+In Lean, inventory only the connected library and the current page; do not open other pages.
+
 If no library is connected and one exists for this file, ask the user to connect it before continuing.
 
 Inventory, once, directly from the file and any connected libraries:
