@@ -20,14 +20,22 @@ const config = JSON.parse(await readFile(path.join(repoRoot, 'skills.config.json
  * assertions (beyond the ones every skill must satisfy, checked separately).
  */
 const REQUIRED_HEADINGS = {
-  'design-brief': ['## Discovery'],
+  'design-brief': [
+    '## Budget modes',
+    '## The Spec',
+    '## If there is no Spec',
+    '## Status',
+    '## Discovery',
+    '## Before you finish',
+  ],
   'design-plan': ['## Budget modes', '## The Spec', '## If there is no Spec', '## Status', '## Before you finish'],
   'design-build': ['## Budget modes', '## The Spec', '## If there is no Spec', '## Status', '## Before you finish'],
   'design-review': ['## Budget modes', '## The Spec', '## If there is no Spec', '## Status', '## Before you finish'],
-  'build-tokens': ['## Discovery'],
-  'build-components': ['## Discovery'],
-  'build-views': ['## Discovery'],
-  'add-motion': ['## Discovery'],
+  'build-tokens': ['## Discovery', '## Budget modes', '## Before you finish'],
+  'build-components': ['## Discovery', '## Budget modes', '## Before you finish'],
+  'build-views': ['## Discovery', '## Budget modes', '## Before you finish'],
+  'add-motion': ['## Discovery', '## Budget modes', '## Before you finish'],
+  'add-prototype': ['## Discovery', '## Budget modes', '## Before you finish'],
 };
 
 /** Terms the medium (the Figma agent) must never see, per the spec's constraints. */
