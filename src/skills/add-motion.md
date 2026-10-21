@@ -17,6 +17,8 @@ If the request is clearly a project — motion across many components and flows,
 
 If the file has no Spec, use Budget mode `Standard` unless the user says otherwise; Discovery below still runs against the file, but there is no Spec section to write the result into, so just use it for this run. If a Spec exists and its Status is `Built` or `Building`, read Budget and Existing assets from it.
 
+With a Spec, modify existing assets only when its Existing assets section lists them under in scope for change. With no Spec, modify only the existing assets the user's request names; everything else is read-only.
+
 If the request is ambiguous, ask once, in one message, before creating or changing anything. Never ask a question once building has started.
 
 <!-- include: partials/discovery.md -->

@@ -1,6 +1,6 @@
 ## Visual directions
 
-With an empty file, propose two or three directions grounded in the subject; for each, name the direction, a pairing, a palette, and the hero element. With a design system present, flex within it. Commit to one direction; never average several.
+For each direction you propose, ground it in the subject and name a pairing, a palette, and the hero element. Commit to one direction; never average several.
 
 | Direction | Mood | Type | Palette | Density | Radius | Motion | Use when |
 |---|---|---|---|---|---|---|---|

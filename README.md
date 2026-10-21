@@ -6,7 +6,7 @@ A set of custom skills for the Figma agent (the chat agent inside Figma Design) 
 
 Run these in order for anything beyond a trivial edit:
 
-1. `/design-brief` — interviews you, discovers the file and any connected libraries, settles a visual direction, and writes a Spec for you to approve in chat.
+1. `/design-brief` — interviews you, discovers the file and any connected libraries, settles a visual direction, and writes a Spec for you to approve by typing `/design-brief continue approved`.
 2. `/design-plan` — turns the approved Spec into an ordered, verifiable build plan, split into runs that fit your credit budget.
 3. `/design-build` — runs the whole plan in one go, verifying and fixing each step, and reports once at the end.
 4. `/design-review` — checks the result against the Spec and an anti-generic rubric, and pins ranked finding cards beside the work.
@@ -51,8 +51,8 @@ Every prompt to the Figma agent spends AI credits from your monthly seat allowan
 
 | Budget mode | Who it suits | What changes |
 |---|---|---|
-| Lean | Starter, Dev/Collab/View seats | Fewer questions per message, limited discovery, optional steps skipped, one screenshot total, at most 5 review findings. |
-| Standard (default) | Professional Full seat | Full discovery, one screenshot per composed screen, up to 10 review findings. |
+| Lean | Starter, Dev/Collab/View seats | Up to three questions per message and at most three interview rounds, discovery limited to the connected library and the current page, optional steps skipped, one screenshot per run, at most 5 review findings. |
+| Standard (default) | Professional Full seat | Up to three questions per message, full discovery, one screenshot per composed screen, up to 10 review findings. |
 | Generous | Organization/Enterprise seat, or purchased credits | Up to two fix passes per step, up to 15 review findings. |
 
 ## Known limitations
@@ -60,7 +60,7 @@ Every prompt to the Figma agent spends AI credits from your monthly seat allowan
 - One skill runs per prompt; if a message names more than one slash command, only the first runs.
 - Figma Specs are in open beta; if the agent can't create one in your file, the skills fall back to a locked text frame named `Spec — <topic>` in a `— Specs —` section, with the same sections and Status line.
 - Prototyping and interactions are not supported yet; `/add-prototype` stays unpublished until they are.
-- Motion generation is gated per Figma account; `/add-motion` and the motion step in `/design-build` check availability first and stop with a clear message if it isn't enabled.
+- Motion generation is gated per Figma account; `/add-motion` checks availability first and stops with a clear message if it isn't enabled; in `/design-build` the motion steps are blocked and the run continues.
 - The upload size limit for custom skills is untested until Probe 1 in `tests/README.md` is run; `skills.config.json`'s `maxBytes` may need adjusting afterward.
 
 ## Development
@@ -72,4 +72,4 @@ Skills are written once in `src/partials/` as shared rule blocks (tokens, compon
 
 ## Status
 
-Untested in Figma. The skills build cleanly and the assembly test suite is green, but no scenario in `tests/scenarios/` has been run against the real Figma agent yet. See `tests/README.md` for the probes to run first and the twelve scenarios to run afterward.
+Untested in Figma. The skills build cleanly and the assembly test suite is green, but no scenario in `tests/scenarios/` has been run against the real Figma agent yet. See `tests/README.md` for the probes to run first and the thirteen scenarios to run afterward.

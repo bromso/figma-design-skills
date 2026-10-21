@@ -15,6 +15,8 @@ If the request is clearly a project — a whole token set spanning several colle
 
 If the file has no Spec, use Budget mode `Standard` unless the user says otherwise; Discovery below still runs against the file, but there is no Spec section to write the result into, so just use it for this run. If a Spec exists and its Status is `Built` or `Building`, read Budget and Existing assets from it.
 
+With a Spec, modify existing assets only when its Existing assets section lists them under in scope for change. With no Spec, modify only the existing assets the user's request names; everything else is read-only.
+
 If the request is ambiguous, ask once, in one message, before creating or changing anything. Never ask a question once building has started.
 
 ## Discovery
@@ -39,7 +41,7 @@ Write the result into the Spec's Discovery section as soon as it's gathered, so 
 
 | Mode | Review findings | Fix passes per step | Screenshots | Brief question rounds |
 |---|---|---|---|---|
-| Lean | 5 | 1 | one at the end | ≤3 per message |
+| Lean | 5 | 1 | one at the end | ≤3 per message, ≤3 rounds |
 | Standard | 10 | 1 | one per composed screen | ≤3 per message |
 | Generous | 15 | 2 | one per composed screen | 1 per message if instructions persist |
 

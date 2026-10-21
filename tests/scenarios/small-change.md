@@ -5,7 +5,7 @@ Tests that `/design-brief` correctly sizes a small, well-scoped request, skips `
 ## Prompt
 
 1. `/design-brief` — "add a disabled state to Button"
-2. Answer the short interview, approve in chat.
+2. Answer the short interview, then approve by typing `/design-brief continue approved`.
 3. `/design-build`
 
 ## File setup

@@ -17,7 +17,7 @@ Find the Spec (The Spec, above). If none exists, follow If there is no Spec.
 
 If one exists, act on its Status:
 
-- `Draft` — say the Spec isn't approved yet, and ask the user to approve it in chat via `/design-brief continue`.
+- `Draft` — say the Spec isn't approved yet, and ask the user to finish and approve it via `/design-brief continue`.
 - `Approved` — continue to Write the Plan.
 - `Planned` or `Building` — say the work is already planned, and tell the user to run `/design-build`.
 - `Built` — say the work is already built, and point the user to `/design-review`.

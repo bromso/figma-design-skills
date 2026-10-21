@@ -11,7 +11,7 @@ Run every step of the Plan in the Spec, verify each one, and report once. Never 
 
 The Spec is the contract between runs: write to it, read from it, never re-derive it.
 
-Use a native Figma Spec titled `Spec — <topic>` when the file supports creating one; otherwise the fallback is a locked text frame named `Spec — <topic>` inside a section named `— Specs —` on the current page, with the same sections and Status line. Only the container differs; read and write "the Spec" by heading.
+Use a native Figma Spec titled `Spec — <topic>` when the file supports creating one; otherwise the fallback is a locked text frame named `Spec — <topic>` inside a section named `— Specs —` on the current page, with the same sections and Status line. Only the container differs; read and write "the Spec" by heading. To find the Spec, search every page for `— Specs —` / `Spec — …`; this is not discovery and the Lean page limit does not apply.
 
 When a file has several Specs, target the one in the current selection, else the most recent Spec whose Status is not `Built`, else ask.
 
@@ -39,7 +39,7 @@ Every Spec has these sections, in order:
 Status moves through five states, each set by one command:
 
 - `Draft` — set by `/design-brief` on first write.
-- `Approved` — set by `/design-brief` once the user approves in chat.
+- `Approved` — set by `/design-brief` once the user types `/design-brief continue approved`.
 - `Planned` — set by `/design-plan` (or directly by `/design-brief` for a small change that skips it).
 - `Building` — set by `/design-build` mid-run, so a second prompt resumes cleanly.
 - `Built` — set by `/design-build` once every step is done or blocked.
@@ -55,7 +55,7 @@ If no Spec can be found for this request, say so: no Spec was found in this file
 
 | Mode | Review findings | Fix passes per step | Screenshots | Brief question rounds |
 |---|---|---|---|---|
-| Lean | 5 | 1 | one at the end | ≤3 per message |
+| Lean | 5 | 1 | one at the end | ≤3 per message, ≤3 rounds |
 | Standard | 10 | 1 | one per composed screen | ≤3 per message |
 | Generous | 15 | 2 | one per composed screen | 1 per message if instructions persist |
 
@@ -68,7 +68,7 @@ Find the Spec (The Spec, above). If none exists, follow If there is no Spec.
 
 If one exists, act on its Status:
 
-- `Draft` — say the Spec isn't approved yet, and ask the user to approve it in chat via `/design-brief continue`. Do not build.
+- `Draft` — say the Spec isn't approved yet, and ask the user to finish and approve it via `/design-brief continue`. Do not build.
 - `Approved` — say the Spec has no Plan yet, and tell the user to run `/design-plan`. Do not build.
 - `Planned` — start a new build at Run the plan.
 - `Building` — resume at Run the plan from the Build log.
@@ -89,7 +89,7 @@ For each step:
 - **Motion:** before the first motion step, check that motion is available. If it is not, log each motion step `blocked` with `verify: not run (motion not enabled on this account)` and continue; do not stop the run.
 - **Build** the step with the matching domain rules below (Tokens, Components, Views, or Motion rules) and the inputs it names.
 - **Verify** against the step's own `verify:` checks, plus the domain's Verify list. Structural checks always run. Take a screenshot only where the Budget mode allows: Lean takes one, after the last step of the run; Standard and Generous take one per composed screen (views steps). Read each screenshot against the step's visual check.
-- **Rubric self-check (views steps):** before marking a composed screen done, check it against every line of the Anti-generic rubric and the UX rules. A true rubric line counts as a verify failure.
+- **Rubric self-check (views steps):** before marking a composed screen done, check it against every line of the Anti-generic rubric and the UX rules. A true rubric line counts as a verify failure. A rubric line the Spec's Visual direction or Existing assets deliberately requires is not a failure; note it in the Build log.
 - **Fix:** on a verify failure, make one fix pass (two in Generous) and verify again. If it still fails, log the step `blocked` with the failing check, and move on.
 - **Log** the step (Build log, below) before starting the next one.
 
@@ -183,7 +183,7 @@ Check the canvas against each line. Any line that is true is a finding; name the
 - An interactive component lacks a hover or pressed state.
 - An empty, error, or loading state the Spec lists is missing.
 - More than two typefaces appear on one screen.
-- A screen has no hero, or more than one competing for it.
+- A screen the Spec names a hero for has none, or more than one competes for it. With no Spec, check primary screens only, never settings, tables, or forms.
 - Icons mix sets, stroke weights, or sizes.
 
 ### UX rules by priority

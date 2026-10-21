@@ -8,7 +8,7 @@ Three things to test before trusting any scenario result, in this order. Each pr
 
 ### Probe 1: size limit
 
-Upload dummy skills of 10 000, 20 000, and 40 000 bytes via *Add context → Skills → Upload a file*. Record the largest accepted and the exact error text Figma shows for the ones that are rejected. Then set `maxBytes` in `skills.config.json` to the largest accepted size minus 10%.
+Upload the two largest real skills first, `dist/design-brief.md` and `dist/design-build.md`, via *Add context → Skills → Upload a file*. If both are accepted, upload dummy skills of 20 000 and then 40 000 bytes to find the ceiling, and record the largest accepted size and the exact error text Figma shows for any rejected one. If either real file is rejected, record the exact error text and the largest size that was accepted. Then set `maxBytes` in `skills.config.json` to the largest accepted size minus 10%.
 
 ### Probe 2: Specs
 
@@ -16,7 +16,7 @@ Ask the agent to create a Spec named `Spec — Probe` with headings Intent, Audi
 
 ### Probe 3: instruction persistence
 
-Install a tiny `/probe-persist` skill that asks one question per message. Answer three times in a row without re-typing the command. Record whether the agent kept following the skill's instructions through all three replies.
+Upload `tests/probe-persist.md` (a tiny `/probe-persist` skill that asks one question per message) via *Add context → Skills → Upload a file*, then type `/probe-persist`. Answer three times in a row without re-typing the command. Record whether the agent kept following the skill's instructions through all three replies.
 
 ## Tester access
 

@@ -17,7 +17,7 @@ Find the Spec (The Spec, above). If none exists, follow If there is no Spec.
 
 If one exists, act on its Status:
 
-- `Draft` — say the Spec isn't approved yet, and ask the user to approve it in chat via `/design-brief continue`. Do not build.
+- `Draft` — say the Spec isn't approved yet, and ask the user to finish and approve it via `/design-brief continue`. Do not build.
 - `Approved` — say the Spec has no Plan yet, and tell the user to run `/design-plan`. Do not build.
 - `Planned` — start a new build at Run the plan.
 - `Building` — resume at Run the plan from the Build log.
@@ -38,7 +38,7 @@ For each step:
 - **Motion:** before the first motion step, check that motion is available. If it is not, log each motion step `blocked` with `verify: not run (motion not enabled on this account)` and continue; do not stop the run.
 - **Build** the step with the matching domain rules below (Tokens, Components, Views, or Motion rules) and the inputs it names.
 - **Verify** against the step's own `verify:` checks, plus the domain's Verify list. Structural checks always run. Take a screenshot only where the Budget mode allows: Lean takes one, after the last step of the run; Standard and Generous take one per composed screen (views steps). Read each screenshot against the step's visual check.
-- **Rubric self-check (views steps):** before marking a composed screen done, check it against every line of the Anti-generic rubric and the UX rules. A true rubric line counts as a verify failure.
+- **Rubric self-check (views steps):** before marking a composed screen done, check it against every line of the Anti-generic rubric and the UX rules. A true rubric line counts as a verify failure. A rubric line the Spec's Visual direction or Existing assets deliberately requires is not a failure; note it in the Build log.
 - **Fix:** on a verify failure, make one fix pass (two in Generous) and verify again. If it still fails, log the step `blocked` with the failing check, and move on.
 - **Log** the step (Build log, below) before starting the next one.
 

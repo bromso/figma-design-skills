@@ -11,7 +11,7 @@ Review the work against its Spec when one applies, always against the anti-gener
 
 The Spec is the contract between runs: write to it, read from it, never re-derive it.
 
-Use a native Figma Spec titled `Spec — <topic>` when the file supports creating one; otherwise the fallback is a locked text frame named `Spec — <topic>` inside a section named `— Specs —` on the current page, with the same sections and Status line. Only the container differs; read and write "the Spec" by heading.
+Use a native Figma Spec titled `Spec — <topic>` when the file supports creating one; otherwise the fallback is a locked text frame named `Spec — <topic>` inside a section named `— Specs —` on the current page, with the same sections and Status line. Only the container differs; read and write "the Spec" by heading. To find the Spec, search every page for `— Specs —` / `Spec — …`; this is not discovery and the Lean page limit does not apply.
 
 When a file has several Specs, target the one in the current selection, else the most recent Spec whose Status is not `Built`, else ask.
 
@@ -39,7 +39,7 @@ Every Spec has these sections, in order:
 Status moves through five states, each set by one command:
 
 - `Draft` — set by `/design-brief` on first write.
-- `Approved` — set by `/design-brief` once the user approves in chat.
+- `Approved` — set by `/design-brief` once the user types `/design-brief continue approved`.
 - `Planned` — set by `/design-plan` (or directly by `/design-brief` for a small change that skips it).
 - `Building` — set by `/design-build` mid-run, so a second prompt resumes cleanly.
 - `Built` — set by `/design-build` once every step is done or blocked.
@@ -55,7 +55,7 @@ If no Spec can be found for this request, say so: no Spec was found in this file
 
 | Mode | Review findings | Fix passes per step | Screenshots | Brief question rounds |
 |---|---|---|---|---|
-| Lean | 5 | 1 | one at the end | ≤3 per message |
+| Lean | 5 | 1 | one at the end | ≤3 per message, ≤3 rounds |
 | Standard | 10 | 1 | one per composed screen | ≤3 per message |
 | Generous | 15 | 2 | one per composed screen | 1 per message if instructions persist |
 
@@ -64,7 +64,12 @@ Default is Standard when the user doesn't know.
 
 ## Read-only
 
-Never edit the reviewed work, unless this run's prompt also says "fix" or "fix them". Then, after pinning the cards: apply every finding in one pass, re-check the changed nodes, and append `— fixed` or `— open` to each card's title. Keep the Existing assets rule: an asset not listed as in scope for change is reported, never touched.
+Never edit the reviewed work, unless this run's prompt also says "fix" or "fix them". Then:
+
+- If a `Review — <topic>` frame already exists for this work and the prompt says fix, apply its open cards, re-check the fixed nodes, mark each card fixed or open; do not re-review or pin a second frame.
+- Otherwise, after pinning the cards: apply every finding in one pass, re-check the changed nodes, and append `— fixed` or `— open` to each card's title.
+
+Keep the Existing assets rule: an asset not listed as in scope for change is reported, never touched.
 
 ## Find what to review
 
@@ -99,7 +104,7 @@ Check the canvas against each line. Any line that is true is a finding; name the
 - An interactive component lacks a hover or pressed state.
 - An empty, error, or loading state the Spec lists is missing.
 - More than two typefaces appear on one screen.
-- A screen has no hero, or more than one competing for it.
+- A screen the Spec names a hero for has none, or more than one competes for it. With no Spec, check primary screens only, never settings, tables, or forms.
 - Icons mix sets, stroke weights, or sizes.
 
 ### UX rules by priority
@@ -139,7 +144,7 @@ Place one frame named `Review — <topic>` to the right of the work. One card pe
 
 End with a one-line summary: cards per severity, and whether a fix pass ran.
 
-- Spec used: Status stays `Built`. The one exception to the shape below, since the next step is a reply, not a run: `Next: reply "fix them" to apply the findings, or run /design-brief for the next piece of work.`
+- Spec used: Status stays `Built`. Instead of the shape below, close with exactly: `Next: run /design-review fix them to apply the findings, or /design-brief for the next piece of work.` If a fix pass left no card open, close with `Next: run /design-brief for the next piece of work.`
 - No Spec used: summary line only, no hand-off.
 
 ## Before you finish

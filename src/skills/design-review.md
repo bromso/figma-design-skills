@@ -13,7 +13,12 @@ Review the work against its Spec when one applies, always against the anti-gener
 
 ## Read-only
 
-Never edit the reviewed work, unless this run's prompt also says "fix" or "fix them". Then, after pinning the cards: apply every finding in one pass, re-check the changed nodes, and append `— fixed` or `— open` to each card's title. Keep the Existing assets rule: an asset not listed as in scope for change is reported, never touched.
+Never edit the reviewed work, unless this run's prompt also says "fix" or "fix them". Then:
+
+- If a `Review — <topic>` frame already exists for this work and the prompt says fix, apply its open cards, re-check the fixed nodes, mark each card fixed or open; do not re-review or pin a second frame.
+- Otherwise, after pinning the cards: apply every finding in one pass, re-check the changed nodes, and append `— fixed` or `— open` to each card's title.
+
+Keep the Existing assets rule: an asset not listed as in scope for change is reported, never touched.
 
 ## Find what to review
 
@@ -54,7 +59,7 @@ Place one frame named `Review — <topic>` to the right of the work. One card pe
 
 End with a one-line summary: cards per severity, and whether a fix pass ran.
 
-- Spec used: Status stays `Built`. The one exception to the shape below, since the next step is a reply, not a run: `Next: reply "fix them" to apply the findings, or run /design-brief for the next piece of work.`
+- Spec used: Status stays `Built`. Instead of the shape below, close with exactly: `Next: run /design-review fix them to apply the findings, or /design-brief for the next piece of work.` If a fix pass left no card open, close with `Next: run /design-brief for the next piece of work.`
 - No Spec used: summary line only, no hand-off.
 
 <!-- include: partials/handoff.md -->

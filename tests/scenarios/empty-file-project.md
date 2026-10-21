@@ -9,11 +9,13 @@ Send as one message to start:
 > /design-brief
 > I want to design a settings area for a SaaS app.
 
-Reply to each question round as it comes. When the Spec is played back, approve it in chat (reply "approved").
+Reply to each question round as it comes. When the Spec is played back, approve it by typing `/design-brief continue approved`.
 
 ## File setup
 
 A brand-new, empty Figma Design file: the default blank page only, no components, no text or effect styles, no variable collections, and no library connected to the chat.
+
+Variant, Specs unavailable: the same empty file on an account or file where the agent cannot create a native Figma Spec. Run the same prompt, then `/design-plan` once approved.
 
 ## Budget mode
 
@@ -30,9 +32,10 @@ Standard (do not state a plan or seat; let the brief's default apply and confirm
 - [ ] Plays back assumptions as the interview proceeds, marking guesses as guesses
 - [ ] Writes a Spec titled `Spec — <topic>` (or the locked-text-frame fallback if Specs are unavailable in this file) with all sixteen sections, Status `Draft`
 - [ ] Creates no component, variable, frame, or style beyond the Spec itself during this run
-- [ ] Asks for approval in chat before moving Status past `Draft`
+- [ ] Asks for approval before moving Status past `Draft`, ending the request with "To approve, type `/design-brief continue approved`."
 - [ ] Ends every interview message with the `/design-brief continue` reply line
-- [ ] On approval, sets Status to `Approved` and hands off naming `/design-plan`
+- [ ] On `/design-brief continue approved`, sets Status to `Approved` and hands off naming `/design-plan`
+- [ ] Specs unavailable variant: says it cannot create a native Spec, writes the Spec as a locked text frame `Spec — <topic>` inside a `— Specs —` section with all sixteen sections and the Status line, and `/design-plan` later finds it there
 
 ## Baseline (without skill)
 

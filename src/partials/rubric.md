@@ -15,7 +15,7 @@ Check the canvas against each line. Any line that is true is a finding; name the
 - An interactive component lacks a hover or pressed state.
 - An empty, error, or loading state the Spec lists is missing.
 - More than two typefaces appear on one screen.
-- A screen has no hero, or more than one competing for it.
+- A screen the Spec names a hero for has none, or more than one competes for it. With no Spec, check primary screens only, never settings, tables, or forms.
 - Icons mix sets, stroke weights, or sizes.
 
 ### UX rules by priority

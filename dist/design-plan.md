@@ -11,7 +11,7 @@ Turn an approved Spec into an ordered build plan with verification built in. Thi
 
 The Spec is the contract between runs: write to it, read from it, never re-derive it.
 
-Use a native Figma Spec titled `Spec — <topic>` when the file supports creating one; otherwise the fallback is a locked text frame named `Spec — <topic>` inside a section named `— Specs —` on the current page, with the same sections and Status line. Only the container differs; read and write "the Spec" by heading.
+Use a native Figma Spec titled `Spec — <topic>` when the file supports creating one; otherwise the fallback is a locked text frame named `Spec — <topic>` inside a section named `— Specs —` on the current page, with the same sections and Status line. Only the container differs; read and write "the Spec" by heading. To find the Spec, search every page for `— Specs —` / `Spec — …`; this is not discovery and the Lean page limit does not apply.
 
 When a file has several Specs, target the one in the current selection, else the most recent Spec whose Status is not `Built`, else ask.
 
@@ -39,7 +39,7 @@ Every Spec has these sections, in order:
 Status moves through five states, each set by one command:
 
 - `Draft` — set by `/design-brief` on first write.
-- `Approved` — set by `/design-brief` once the user approves in chat.
+- `Approved` — set by `/design-brief` once the user types `/design-brief continue approved`.
 - `Planned` — set by `/design-plan` (or directly by `/design-brief` for a small change that skips it).
 - `Building` — set by `/design-build` mid-run, so a second prompt resumes cleanly.
 - `Built` — set by `/design-build` once every step is done or blocked.
@@ -55,7 +55,7 @@ If no Spec can be found for this request, say so: no Spec was found in this file
 
 | Mode | Review findings | Fix passes per step | Screenshots | Brief question rounds |
 |---|---|---|---|---|
-| Lean | 5 | 1 | one at the end | ≤3 per message |
+| Lean | 5 | 1 | one at the end | ≤3 per message, ≤3 rounds |
 | Standard | 10 | 1 | one per composed screen | ≤3 per message |
 | Generous | 15 | 2 | one per composed screen | 1 per message if instructions persist |
 
@@ -68,7 +68,7 @@ Find the Spec (The Spec, above). If none exists, follow If there is no Spec.
 
 If one exists, act on its Status:
 
-- `Draft` — say the Spec isn't approved yet, and ask the user to approve it in chat via `/design-brief continue`.
+- `Draft` — say the Spec isn't approved yet, and ask the user to finish and approve it via `/design-brief continue`.
 - `Approved` — continue to Write the Plan.
 - `Planned` or `Building` — say the work is already planned, and tell the user to run `/design-build`.
 - `Built` — say the work is already built, and point the user to `/design-review`.

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const scenariosDir = path.join(__dirname, 'scenarios');
 
-/** The twelve scenario names fixed by the task-11 brief. */
+/** The thirteen scenario names: the twelve fixed by the task-11 brief, plus brief-continue. */
 const SCENARIO_NAMES = [
   'empty-file-project',
   'library-file-project',
@@ -21,6 +21,7 @@ const SCENARIO_NAMES = [
   'standalone-component',
   'standalone-view',
   'review-only',
+  'brief-continue',
 ];
 
 /** Exact headings every scenario file must contain, in this order. */
@@ -37,13 +38,13 @@ const REQUIRED_HEADINGS = [
 /** Scenarios whose Baseline section records a real baseline run, not "not recorded". */
 const BASELINE_REQUIRED = new Set(['empty-file-project', 'small-change', 'library-file-project']);
 
-test('tests/scenarios contains exactly the twelve fixed scenario files', async () => {
+test('tests/scenarios contains exactly the thirteen fixed scenario files', async () => {
   const entries = await readdir(scenariosDir);
   const mdFiles = entries.filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, ''));
   assert.deepEqual(
     [...mdFiles].sort(),
     [...SCENARIO_NAMES].sort(),
-    `expected exactly the twelve fixed scenario files, found: ${mdFiles.join(', ')}`,
+    `expected exactly the thirteen fixed scenario files, found: ${mdFiles.join(', ')}`,
   );
 });
 

@@ -7,7 +7,7 @@ description: Interviews the user about a design task before anything is built, d
 
 Ask before you build. This command interviews the user, records the answers in a Spec, and gets the Spec approved. Never mutate the canvas here except to create and update the Spec, and a spike only if the user says yes.
 
-If the user typed `/design-brief continue`, find the Spec whose Status is `Draft` (see The Spec below for which one), read what is already filled in, and resume the interview at the first section still empty. Do not ask again what the Spec already answers. If every section but Plan and Build log is filled (Plan too, for a small change), go to Approval gate. If there is no Draft Spec, follow If there is no Spec.
+If the user typed `/design-brief continue` (with or without `approved`), find the Spec whose Status is `Draft` (see The Spec below for which one), read what is already filled in, and resume the interview at the first section still empty. Do not ask again what the Spec already answers. If every section but Plan and Build log is filled (Plan too, for a small change), go to Approval gate; with `approved`, that is the approval, so apply On approval. If there is no Draft Spec, follow If there is no Spec.
 
 <!-- include: partials/credit-modes.md -->
 
@@ -17,8 +17,8 @@ Decide the size first and say it out loud in one line, with the reason. If the u
 
 | Size | Example | What happens |
 |---|---|---|
-| Quick, clear task | "rename these layers", "set this fill to `color/bg/accent`" | Say it's a quick task that needs no Spec, and tell the user to just ask the agent directly. Then stop. Do not do the task yourself and do not add a hand-off line. |
-| Small change | "add a disabled state to Button" | Short interview, agreement in chat, then a short Spec that already holds its one-to-three-step Plan and ends `Planned`. Two commands total: this one and `/design-build`. |
+| Quick, clear task | "rename these layers", "set this fill to `color/bg/accent`" | Say it's a quick task needing no Spec; tell the user to just ask the agent directly. Then stop. Do not do the task yourself or add a hand-off line. |
+| Small change | "add a disabled state to Button" | Short interview, then a short Spec that already holds its one-to-three-step Plan and ends `Planned` once approved. Two commands total: this one and `/design-build`. |
 | Project | "design the settings area", "set up tokens and a component library" | Full interview, Spec, approval, then `/design-plan` and `/design-build`. |
 
 ## Opening
@@ -28,7 +28,7 @@ Send the size line and the first round as one message:
 1. One line offering to skip the questions: "If you'd rather skip the questions, say so and I'll state my assumptions and write the Spec."
 2. The open question: what is the real moment or picture? Who is using this, where, and what are they trying to do?
 3. The budget question: which Figma plan or seat are you on, or how many credits may this work use? (Budget modes above.)
-4. Which library should I connect, if any?
+4. If your team has a library for this, add it to this chat with @ now.
 
 End it with the closing line from Interview.
 
@@ -40,6 +40,7 @@ Instructions may not carry over between messages, so write for that case:
 
 - In Lean and Standard, ask in short rounds of at most three related questions per message.
 - In Generous, ask one question per message only if you find these instructions still apply; otherwise use rounds of three.
+- In Lean, finish the interview in at most three rounds; state assumptions for anything left.
 - End every interview message with exactly: "Reply here, or type `/design-brief continue` if I've lost the thread."
 
 After the first reply, run Discovery (below) once, then create the Spec with Status `Draft` and fill Intent, Audience, Budget, and Discovery. Update its sections as each round settles them, so `/design-brief continue` can pick up from the file.
@@ -52,7 +53,7 @@ Ground to cover. This is territory, not a script; skip what the user or Discover
 - Flows: which screens connect and how, for motion now and prototyping later.
 - Motion: where it adds meaning and how it should feel.
 - Visual direction, required for every size. Settle mood, typefaces, palette, density, hero element, and what it must not look like. If Discovery found an empty file, propose two or three concrete directions from Visual directions below and let the user pick one. If Discovery found a design system, flex within it: choose which of its variables, styles, and components carry the direction, and name what to avoid. Never leave this section blank.
-- Existing assets in scope for change. List every existing node, variable, style, or component the build may modify, and settle each decision fork here: a conflict between code and Figma, a library match that is close but not exact, an existing component to extend versus a new one. Record each decision. Anything not listed is read-only during the build.
+- Existing assets in scope for change. List every existing node, variable, style, or component the build may modify, and settle each fork here: code vs. Figma conflicts, close-but-not-exact library matches, extending an existing component vs. a new one. Record each decision. Anything not listed is read-only during the build.
 
 If the user wants to see a direction before choosing, offer a spike. Build it only after a yes, name its frame `Spike — <topic>`, and note in the Spec that it is throwaway.
 
@@ -78,11 +79,11 @@ For a small change, also fill the Plan with one to three steps, each in exactly 
 
 In Lean, mark every non-essential step `optional`.
 
-Then send one message summarising the Spec section by section, in a few lines, and ask for approval, ending with the closing line from Interview.
+Then send one message summarising the Spec section by section, in a few lines, and ask for approval. End it with exactly "To approve, type `/design-brief continue approved`." and then, for changes, the closing line from Interview.
 
 ## Approval gate
 
-Do not set Status past `Draft` until the user approves in chat. If they ask for changes, update the Spec, play back only what changed, and ask again.
+Do not set Status past `Draft` until the user types `/design-brief continue approved`. A plain "approved" reply is not approval: repeat the approval line and change nothing. If they ask for changes, update the Spec, play back only what changed, and ask again.
 
 On approval:
 
