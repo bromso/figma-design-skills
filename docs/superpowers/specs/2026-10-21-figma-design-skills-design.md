@@ -49,7 +49,18 @@ Verified against Figma's help center and community sources on 2026-10-21.
 - **Agent capabilities (GA since 2026-10-06).** Supported: 0→1 generation, layout editing, component instance editing, applying styles and variables, switching modes, **authoring design system components, styles and variables**, searching connected libraries with `@` references, bulk content, **motion and animation**, Specs (read, write, create), design feedback and critique, selecting objects, taking and reasoning about screenshots, undo per change. **Coming soon, not supported today: prototyping and interactions, icons, slots, vector editing.**
 - **Specs** are in open beta rolling out over the coming weeks, and whether the in-app Design agent can *create* one (rather than only read it) is unconfirmed: the Config India notes say it can, the design-files help article does not mention Specs. **The first test is "can `/design-brief` create a Spec in this file".** If not, the fallback is the primary v1 design and v1 does not wait: a locked text frame named `Spec — <topic>` in a `— Specs —` section on the current page, with exactly the same sections and Status line. Every process skill is written to read and write "the Spec" by section heading, so the container (Spec or text frame) is the only thing that differs.
 - **Skill scope across turns is unconfirmed.** The help center says only that a slash command invokes a skill; it does not say whether the instructions persist for the rest of the conversation. **Second test: does the agent still follow `/design-brief` three replies later.** If instructions persist, the brief asks one question per message. If they do not, the brief asks in short rounds of at most three related questions per message, and every message ends with "reply here, or type `/design-brief continue` if I've lost the thread". The test scenarios cover both.
-- **Credits.** Agent runs consume Figma AI credits. A long unattended build is a long run. The build skill must keep its steps proportionate and say when a plan is large enough that the user may prefer to run it in two prompts.
+- **Credits are the scarce resource.** Every prompt to the agent is a run that consumes Figma AI credits from the user's monthly seat allowance (figures from Figma's AI page and help center, October 2026):
+
+  | Plan / seat | Credits per month | Notes |
+  |---|---|---|
+  | Starter (free) | 500 | capped at 150 per day |
+  | Dev, Collab, View seats on any paid plan | 500 | |
+  | Professional, Full seat | 3,000 | |
+  | Organization, Full seat | 3,500 | |
+  | Enterprise, Full seat | 4,250 | |
+  | Purchased add-on credits | shared pool | subscription or pay-as-you-go |
+
+  Credits reset monthly, do not roll over, and are shared with Figma Make and every other AI feature. There is no fixed per-run price for the agent: Figma's own examples are "30+", "100+" and "300+" credits, cost rises with connected libraries, attached context, conversation length, and the number of steps the agent takes, and credits are charged for work done even when the result is wrong. Users report ordinary prompts in the 60–140 range. A full project (brief, plan, build, review) could plausibly consume several hundred to over a thousand credits. **Every skill is therefore designed to minimise runs and context, and the workflow adapts to a declared credit budget (see §7.0).**
 - **Libraries must be connected by the user.** The agent only sees libraries added to the chat. Every skill's first step reminds the user to connect the relevant library if one exists.
 
 ## 6. Architecture
@@ -114,6 +125,26 @@ The single-source-of-truth for domain rules is `src/partials/`. `/design-build` 
 
 ## 7. The workflow in detail
 
+### 7.0 Credit awareness (applies to every skill)
+
+Principles, in priority order:
+
+1. **Fewer runs beat shorter runs.** Each prompt is a run with fixed overhead (the skill text, the Spec, connected libraries). Skills batch work into as few prompts as the task allows and never ask the user to "send another prompt" for something the current run can finish.
+2. **Front-load intent.** The brief exists partly to prevent the expensive thing: fix-it prompts after a wrong build. Figma's own guidance says the same.
+3. **Discover once, record it.** File and library discovery happens in `/design-brief` and is written into the Spec. Later skills read the Spec instead of re-scanning.
+4. **Verification is proportionate.** Structural checks are cheap; screenshots and re-render loops are not. One screenshot per composed screen, one fix pass, then stop.
+5. **Say what things cost.** Each process skill ends with a one-line note of what the next command is likely to cost in rough terms (small / medium / large run) so the user can decide when to run it.
+
+**Credit budget modes.** `/design-brief` asks one question early: which plan or seat the user is on, or how many credits this piece of work may use. The answer is recorded in the Spec as `Budget: Lean | Standard | Generous` and every later skill reads it.
+
+| Mode | Who | What changes |
+|---|---|---|
+| **Lean** | Starter, Dev/Collab/View seats, or anyone who says "keep it cheap" (about 500 credits a month, 150 a day) | Brief asks in two or three rounds of grouped questions, not one question per message. Discovery is limited to the connected library and the current page. Plan marks every non-essential step optional and the build skips them. Build takes no screenshots except one at the end, does structural verification only, and caps fix passes at one. Review runs once and pins at most five findings. The plan is split so no single run is larger than "medium", because of the daily cap. |
+| **Standard** | Professional Full seat (3,000 a month) | Brief asks in rounds of two or three related questions. Full discovery. Build takes one screenshot per composed screen and one fix pass per step. Review pins up to ten findings. |
+| **Generous** | Organization or Enterprise Full seat, or purchased credits | One question per message is allowed if instructions persist. Build may take a second fix pass. Review pins up to fifteen findings. |
+
+The default when the user doesn't know is **Standard**. The brief never spends a run just to ask about budget; the question is folded into the first round.
+
 ### 7.1 `/design-brief`
 
 **Sizing.** First decide the size out loud, as superpowers does:
@@ -129,6 +160,7 @@ The single-source-of-truth for domain rules is `src/partials/`. `/design-build` 
 **Ground to cover** (territory, not a script; one question per message):
 
 - What the thing is, who it's for, the moment they'll use it.
+- Credit budget (folded into the first round, see §7.0).
 - What exists: connected libraries, local collections, components, styles, naming conventions, existing screens. The skill does this discovery itself and reports it. If no library is connected, it asks the user to connect one if one exists.
 - Scope: which of tokens / components / views / motion are in play. Prototyping is recorded in the Spec as intent for later, with a note that the agent cannot wire it yet.
 - States, variants, breakpoints, real content, edge cases (empty, error, loading).
@@ -139,21 +171,21 @@ The single-source-of-truth for domain rules is `src/partials/`. `/design-build` 
 
 **Playback.** Describe each part back as it becomes clear, mark guesses, ask what's wrong.
 
-**Spec.** Written as a Figma Spec titled `Spec — <topic>` next to the work (fallback in §5). Sections: Intent, Audience, Scope (in/out), Existing assets (reuse / in scope for change), Visual direction, Foundations, Components, Screens, Flows (intent), Motion, Acceptance criteria, Status, Plan (empty until `/design-plan`), Build log (empty until `/design-build`). Status starts as `Draft`. The user approves in chat; the skill sets Status to `Approved` and tells the user to run `/design-plan`.
+**Spec.** Written as a Figma Spec titled `Spec — <topic>` next to the work (fallback in §5). Sections: Intent, Audience, Budget, Scope (in/out), Existing assets (reuse / in scope for change), Discovery (what the brief found in the file and libraries), Visual direction, Foundations, Components, Screens, Flows (intent), Motion, Acceptance criteria, Status, Plan (empty until `/design-plan`), Build log (empty until `/design-build`). Status starts as `Draft`. The user approves in chat; the skill sets Status to `Approved` and tells the user to run `/design-plan`.
 
 ### 7.2 `/design-plan`
 
-Refuses if the Spec's Status is not `Approved`. Writes the Plan section: ordered steps in fixed dependency order tokens → components → views → motion, each with inputs (names and `@` references), the exact assets it creates, and **verification criteria** (structural: counts, names, bindings, modes; visual: which screenshot and what to look for). Steps the Spec excludes are omitted. Ends with an estimate in steps and a note if the plan is large enough to split across two build prompts. Sets Status to `Planned` and says "run `/design-build`".
+Refuses if the Spec's Status is not `Approved`. Writes the Plan section: ordered steps in fixed dependency order tokens → components → views → motion, each with inputs (names and `@` references), the exact assets it creates, and **verification criteria** (structural: counts, names, bindings, modes; visual: which screenshot and what to look for). Steps the Spec excludes are omitted. Marks each step essential or optional. Ends with an estimate of the build's size in runs and rough credit terms, and splits the plan into two or more build prompts when the Budget mode requires it (always in Lean, when the plan is large in Standard). Sets Status to `Planned` and says "run `/design-build`".
 
 There is **one approval gate, the Spec**. The plan is written into the Spec for reference but not re-approved.
 
 ### 7.3 `/design-build`
 
-Refuses if Status is not `Planned` or `Building`. Reads the Plan and Build log, skips completed steps, runs the rest in order. Per step: apply the condensed domain rules, build, verify against the step's criteria, fix before moving on. A step that fails twice is marked blocked in the Build log; the run continues with steps that don't depend on it. Modifies or deletes existing assets only if the Spec lists them. Writes each step's result (asset names, node references, screenshot taken) to the Build log as it goes, so a second prompt resumes cleanly. Sets Status to `Built`. Ends with one summary: what was built, what was verified and how, what was blocked or unverifiable, and "run `/design-review`".
+Refuses if Status is not `Planned` or `Building`. Reads the Plan and Build log, skips completed steps, runs the rest in order. Per step: apply the condensed domain rules, build, verify against the step's criteria at the depth the Budget mode allows, fix before moving on. Optional steps are skipped in Lean mode. A step that fails twice is marked blocked in the Build log; the run continues with steps that don't depend on it. Modifies or deletes existing assets only if the Spec lists them. Writes each step's result (asset names, node references, screenshot taken) to the Build log as it goes, so a second prompt resumes cleanly. Sets Status to `Built`. Ends with one summary: what was built, what was verified and how, what was blocked or unverifiable, and "run `/design-review`".
 
 ### 7.4 `/design-review`
 
-Reads the Spec, Plan, Build log, and the built nodes. Checks every acceptance criterion; the anti-generic rubric; structural rules (no stacked variants, no unscoped variables, no unbound fills where a token exists, no detached instances, no clipped or overflowing text, no placeholder content). Pins ranked findings as cards beside the work, one card per root cause, severity-ordered, with the specific fix. Read-only by default; "fix them" in a follow-up prompt applies the findings in one pass and re-verifies.
+Reads the Spec, Plan, Build log, and the built nodes. Checks every acceptance criterion; the anti-generic rubric; structural rules (no stacked variants, no unscoped variables, no unbound fills where a token exists, no detached instances, no clipped or overflowing text, no placeholder content). Pins ranked findings as cards beside the work, one card per root cause, severity-ordered, with the specific fix, capped by the Budget mode. Read-only by default; "fix them" in a follow-up prompt applies the findings in one pass and re-verifies.
 
 ### 7.5 Domain skills standalone
 
@@ -170,7 +202,8 @@ The method is superpowers' `writing-skills`: a skill is proven when the agent fa
 - When a file has several Specs, a process skill targets the one in the current selection, else the most recent whose Status is not `Built`, else asks.
 - The Specs fallback path is tested in a file without Specs access if one is available; otherwise marked untested.
 - Tests are run by a person in Figma. Automating them (for example through browser automation) is out of scope for v1.
-- The test plan is sized to the tester's access: whether Specs and motion are enabled on their account and how many AI credits are available for baseline-plus-skill runs. **Open: to be confirmed by the user.**
+- **The test plan is sized to a Professional Full seat (3,000 credits a month) unless the tester says otherwise.** Rough budget: a full project scenario (brief, plan, build, review) is assumed to cost 400–800 credits; a standalone domain skill scenario 100–300. That allows roughly three full-project runs plus a handful of domain runs per month, so: baselines (without the skill) are recorded only for `/design-brief` and `/design-build`, the two skills whose value is behaviour change; the other skills are tested with-skill only. Scenarios are run in Lean mode first (cheapest, and the mode most Community users will be on), then once in Standard. Each scenario records its actual credit cost from the credit meter under the prompt, and the recorded costs feed back into the "what the next command costs" lines in the skills.
+- Whether Specs and motion are enabled on the tester's account is checked at the start of testing and recorded in `tests/README`. Paths that cannot be exercised are marked untested in the skill text.
 
 ## 9. Decisions already made (as the user made them)
 
@@ -196,6 +229,8 @@ The method is superpowers' `writing-skills`: a skill is proven when the agent fa
 - A step that fails twice is blocked, not fatal.
 - Slash command names: `design-brief`, `design-plan`, `design-build`, `design-review`, `build-tokens`, `build-components`, `build-views`, `add-motion`, `add-prototype`.
 - Reference fonts are limited to Google Fonts, since those are available in every Figma account.
+- Credit budget modes (Lean / Standard / Generous) are declared in the brief and recorded in the Spec; every skill adapts its depth to the mode. Default is Standard.
+- Test plan is sized to a Professional Full seat; baselines only for the brief and the build.
 
 ## 11. Left to the builder
 
