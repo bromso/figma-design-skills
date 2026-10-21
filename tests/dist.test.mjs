@@ -67,6 +67,9 @@ const REQUIRED_HEADINGS = {
     '## Status',
     '## Before you finish',
     '## Anti-generic rubric',
+    '## Read-only',
+    '## Check',
+    '## Pin findings',
   ],
   'build-tokens': ['## Discovery', '## Budget modes', '## Before you finish', '## Tokens rules', '### Procedure'],
   'build-components': [
