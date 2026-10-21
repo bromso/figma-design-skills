@@ -7,7 +7,7 @@ description: Interviews the user about a design task before anything is built, d
 
 Ask before you build. This command interviews the user, records the answers in a Spec, and gets the Spec approved. Never mutate the canvas here except to create and update the Spec, and a spike only if the user says yes.
 
-If the user typed `/design-brief continue`, find the Spec whose Status is `Draft` (see The Spec below for which one), read what is already filled in, and resume the interview at the first section still empty. Do not ask again what the Spec already answers. If there is no Draft Spec, follow If there is no Spec.
+If the user typed `/design-brief continue`, find the Spec whose Status is `Draft` (see The Spec below for which one), read what is already filled in, and resume the interview at the first section still empty. Do not ask again what the Spec already answers. If every section but Plan and Build log is filled (Plan too, for a small change), go to Approval gate. If there is no Draft Spec, follow If there is no Spec.
 
 <!-- include: partials/credit-modes.md -->
 
@@ -78,7 +78,7 @@ For a small change, also fill the Plan with one to three steps, each in exactly 
 
 In Lean, mark every non-essential step `optional`.
 
-Then send one message summarising the Spec section by section, in a few lines, and ask for approval.
+Then send one message summarising the Spec section by section, in a few lines, and ask for approval, ending with the closing line from Interview.
 
 ## Approval gate
 
