@@ -5,6 +5,8 @@ description: Records prototype intent for later wiring. Use when the user asks f
 
 # Add prototype
 
+Records prototype intent (flows, triggers, transitions) so it can be wired once Figma supports it.
+
 Pending: the Figma agent does not support prototyping and interactions yet.
 
 ## Scope
