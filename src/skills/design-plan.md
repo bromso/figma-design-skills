@@ -41,11 +41,13 @@ If Flows records prototyping intent, do not turn it into a step — the agent ca
 
 Group the numbered steps into one or more runs, by Budget:
 
-- **Lean** — split at layer boundaries only (never mid-layer) so every run is at most medium; say this is because of the 150-credits-a-day cap.
+- **Lean** — split at layer boundaries so every run is at most medium; say this is because of the 150-credits-a-day cap.
 - **Standard** — one run if the Plan has about 12 steps or fewer; otherwise split at layer boundaries into two or more runs.
 - **Generous** — one run, regardless of step count.
 
-When split into more than one run, number the runs in build order and tag each step with its run number. Tell the user: run `/design-build` once per run; it resumes from the Build log.
+If one layer alone exceeds the Lean or Standard limit, split inside it too, keeping dependency order.
+
+When split into more than one run, write a `Run N` line before each run's steps, numbering runs in build order. Tell the user: run `/design-build` once per run; it resumes from the Build log.
 
 Write the finished Plan into the Spec's Plan section and set Status to `Planned`. Hand off with `Next: run /design-build.`, sized from the first (or only) run's step count: small for up to 4 steps, medium for 5 to 12, large for more than 12 (Before you finish).
 

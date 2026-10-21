@@ -44,7 +44,7 @@ Status moves through five states, each set by one command:
 - `Building` — set by `/design-build` mid-run, so a second prompt resumes cleanly.
 - `Built` — set by `/design-build` once every step is done, blocked, or skipped.
 
-`/design-review` reads a `Built` Spec; it never changes Status.
+`/design-review` reads a `Built` or `Building` Spec; it never changes Status.
 
 ## If there is no Spec
 
@@ -73,6 +73,7 @@ Keep the Existing assets rule: an asset not listed as in scope for change is rep
 
 ## Find what to review
 
+- No Spec, and no selection or named frame: ask the user, in one message, to select a frame, and stop.
 - The prompt names a frame or selection, or no Spec exists: review that target against the rubric and structural rules only — the exception to If there is no Spec, above. Say no Spec was used.
 - Otherwise, find the Spec (The Spec, above) and act on its Status:
   - `Draft` — not approved yet; next command `/design-brief continue`.
@@ -144,7 +145,8 @@ Place one frame named `Review — <topic>` to the right of the work. One card pe
 
 End with a one-line summary: cards per severity, and whether a fix pass ran.
 
-- Spec used: Status stays `Built`. Instead of the shape below, close with exactly: `Next: run /design-review fix them to apply the findings, or /design-brief for the next piece of work.` If a fix pass left no card open, close with `Next: run /design-brief for the next piece of work.`
+- Spec `Built` (Status stays `Built`): instead of the shape below, close with exactly: `Next: run /design-review fix them to apply the findings, or /design-brief for the next piece of work.` If a fix pass left no card open, close with `Next: run /design-brief for the next piece of work.`
+- Spec `Building`: close with `Next: run /design-build to finish the remaining steps.`
 - No Spec used: summary line only, no hand-off.
 
 ## Before you finish

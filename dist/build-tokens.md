@@ -68,7 +68,7 @@ Default is Standard when the user doesn't know.
 ### Procedure
 
 1. Run discovery (see Discovery) before creating anything.
-2. Choose the collection architecture from the token count the Spec implies.
+2. Choose the collection architecture from the token count the Spec or the request implies.
 3. Create or extend collections, modes, and primitives first, then the semantic aliases.
 4. Name and scope every variable as it's created.
 5. Add text and effect styles for roles that repeat.

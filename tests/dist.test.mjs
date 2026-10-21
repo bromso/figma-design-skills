@@ -1,6 +1,6 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, rm, readFile } from 'node:fs/promises';
+import { mkdtemp, rm, readFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -177,5 +177,26 @@ test('no written skill mentions Claude Code, MCP, or the Plugin API', async () =
     for (const term of FORBIDDEN_TERMS) {
       assert.ok(!content.includes(term), `${name}: body mentions forbidden term "${term}"`);
     }
+  }
+});
+
+/** Lists every .md file under dir, as paths relative to dir, sorted. */
+async function listFiles(dir) {
+  const entries = await readdir(dir, { recursive: true, withFileTypes: true });
+  return entries
+    .filter((e) => e.isFile() && e.name.endsWith('.md'))
+    .map((e) => path.relative(dir, path.join(e.parentPath ?? e.path, e.name)))
+    .sort();
+}
+
+test('dist/ matches a fresh assembly of src/ (file list and bytes)', async () => {
+  const committedDir = path.join(repoRoot, 'dist');
+  const committed = await listFiles(committedDir);
+  const fresh = await listFiles(distDir);
+  assert.deepEqual(committed, fresh, 'dist/ file list differs from a fresh assembly; run npm run assemble');
+  for (const rel of fresh) {
+    const a = await readFile(path.join(committedDir, rel));
+    const b = await readFile(path.join(distDir, rel));
+    assert.ok(a.equals(b), `dist/${rel} differs from a fresh assembly; run npm run assemble`);
   }
 });

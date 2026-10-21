@@ -186,7 +186,7 @@ Status moves through five states, each set by one command:
 - `Building` — set by `/design-build` mid-run, so a second prompt resumes cleanly.
 - `Built` — set by `/design-build` once every step is done, blocked, or skipped.
 
-`/design-review` reads a `Built` Spec; it never changes Status.
+`/design-review` reads a `Built` or `Building` Spec; it never changes Status.
 
 ## If there is no Spec
 

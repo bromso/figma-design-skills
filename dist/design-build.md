@@ -44,7 +44,7 @@ Status moves through five states, each set by one command:
 - `Building` — set by `/design-build` mid-run, so a second prompt resumes cleanly.
 - `Built` — set by `/design-build` once every step is done, blocked, or skipped.
 
-`/design-review` reads a `Built` Spec; it never changes Status.
+`/design-review` reads a `Built` or `Building` Spec; it never changes Status.
 
 ## If there is no Spec
 
@@ -78,7 +78,7 @@ If one exists, act on its Status:
 
 1. Read Budget, Existing assets, Plan, and Build log from the Spec. Do not re-scan the file or libraries; Discovery in the Spec already records them.
 2. Set Status to `Building` before touching the canvas.
-3. Pick the current run. If the Plan is not split into runs, the whole Plan is one run. Otherwise the current run is the lowest-numbered run with a step that has no Build log entry; build only that run's steps.
+3. Pick the current run. If the Plan is not split into runs, the whole Plan is one run. Otherwise a `Run N` line precedes each run's steps; the current run is the lowest-numbered run with a step that has no Build log entry; build only that run's steps.
 4. Skip every step that already has a Build log entry. Run the rest in Plan order: tokens → components → views → motion.
 
 For each step:

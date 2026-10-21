@@ -70,7 +70,7 @@ Default is Standard when the user doesn't know.
 ### Procedure
 
 1. Run discovery (see Discovery) before building.
-2. Confirm the foundations each component will bind to already exist.
+2. Confirm the foundations each component will bind to already exist. If one or two are missing, stop and say which ones, then suggest `/build-tokens`; if several are missing, suggest `/design-brief` instead. Never hard-code values.
 3. Define the variant properties and matrix, capped at 30 combinations.
 4. Build each variant, binding to variables and using instance swap for icons.
 5. Add a description to the component set and lay variants out in a grid.
