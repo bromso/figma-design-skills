@@ -120,6 +120,16 @@ test('validate: name must equal basename', () => {
   );
 });
 
+test('validate: name must be kebab-case', () => {
+  const md = '---\nname: DesignBrief\ndescription: Something.\n---\nBody.';
+  const errors = validate(md, { name: 'DesignBrief', maxBytes: 16000 });
+  assert.ok(errors.length > 0);
+  assert.ok(
+    errors.some((e) => e.includes('DesignBrief') && /kebab/i.test(e)),
+    `expected an error naming "DesignBrief" as not kebab-case, got: ${errors}`,
+  );
+});
+
 test('validate: description <= 1024 chars', () => {
   const longDescription = 'a'.repeat(1025);
   const md = `---\nname: foo\ndescription: ${longDescription}\n---\nBody.`;

@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const INCLUDE_RE = /^<!-- include: (.+) -->$/;
+const KEBAB_CASE_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const FORBIDDEN_PHRASES = ['load the skill', 'invoke the skill'];
 
 /**
@@ -84,6 +85,9 @@ export function validate(markdown, { name, maxBytes }) {
     }
     if (frontmatter.name !== undefined && frontmatter.name !== name) {
       errors.push(`Frontmatter name "${frontmatter.name}" does not match expected name "${name}"`);
+    }
+    if (frontmatter.name !== undefined && !KEBAB_CASE_RE.test(frontmatter.name)) {
+      errors.push(`Frontmatter name "${frontmatter.name}" must be kebab-case (e.g. "design-brief")`);
     }
     if (frontmatter.description !== undefined && frontmatter.description.length > 1024) {
       errors.push(
