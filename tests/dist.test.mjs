@@ -34,7 +34,16 @@ const REQUIRED_HEADINGS = {
     '## Write the Spec',
     '## Approval gate',
   ],
-  'design-plan': ['## Budget modes', '## The Spec', '## If there is no Spec', '## Status', '## Before you finish'],
+  'design-plan': [
+    '## Budget modes',
+    '## The Spec',
+    '## If there is no Spec',
+    '## Status',
+    '## Before you finish',
+    '## Refuse unless Approved',
+    '## Write the Plan',
+    '## Split for budget',
+  ],
   'design-build': [
     '## Budget modes',
     '## The Spec',
