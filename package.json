@@ -1,0 +1,10 @@
+{
+  "name": "figma-design-skills",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "assemble": "node scripts/assemble.mjs",
+    "test": "node --test tests/**/*.test.mjs"
+  }
+}
