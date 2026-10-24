@@ -18,7 +18,7 @@ Never edit the reviewed work, unless this run's prompt also says "fix" or "fix t
 - If a `Review — <topic>` frame already exists for this work and the prompt says fix, apply its open cards, re-check the fixed nodes, mark each card fixed or open; do not re-review or pin a second frame.
 - Otherwise, after pinning the cards: apply every finding in one pass, re-check the changed nodes, and append `— fixed` or `— open` to each card's title.
 
-Keep the Existing assets rule: an asset not listed as in scope for change is reported, never touched.
+Keep the Existing assets rule: with a Spec, an asset not listed as in scope for change is reported, never touched. With no Spec, the reviewed selection or named frame is in scope; everything outside it is read-only.
 
 ## Find what to review
 

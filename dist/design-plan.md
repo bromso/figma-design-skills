@@ -1,6 +1,6 @@
 ---
 name: design-plan
-description: Turns an approved Spec into an ordered, verifiable build plan grouped by layer — tokens, then components, then views, then motion — splits it into runs sized to the user's credit budget, and sets the Spec's Status to Planned. Use right after /design-brief, once the user has approved the Spec in chat, and before /design-build. Refuses to run, with a specific message, on a Spec that is not yet Approved, already planned or building, or already built.
+description: Turns an approved Spec into an ordered, verifiable build plan grouped by layer — tokens, then components, then views, then motion — splits it into runs sized to the user's credit budget, and sets the Spec's Status to Planned. Use right after /design-brief, once the user has approved the Spec with `/design-brief continue approved`, and before /design-build. Refuses to run, with a specific message, on a Spec that is not yet Approved, already planned or building, or already built.
 ---
 
 # Design plan

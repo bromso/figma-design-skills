@@ -15,7 +15,7 @@ This command records prototype intent — which flows, triggers, and transitions
 
 If a Spec exists, write the intent into its Flows section. If none exists, create a text frame named `Prototype intent — <topic>` and write the intent there instead.
 
-If the request is ambiguous, ask once, in one message, before writing anything.
+If the request is ambiguous, ask once, in one message, before writing anything. Never modify any existing node, variable, or style; the only writes are the Spec's Flows section or the intent text frame.
 
 <!-- include: partials/discovery.md -->
 

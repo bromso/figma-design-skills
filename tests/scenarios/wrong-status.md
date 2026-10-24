@@ -8,7 +8,7 @@ Send `/design-build` against a file whose Spec's Status is `Draft`.
 
 ## File setup
 
-A Figma Design file containing one Spec (native Figma Spec, or the locked-text-frame fallback) with Status `Draft` — the interview is only partly or fully recorded, but the user has not approved it in chat, and the Plan and Build log sections are empty.
+A Figma Design file containing one Spec (native Figma Spec, or the locked-text-frame fallback) with Status `Draft` — the interview is only partly or fully recorded, but the user has not approved it, and the Plan and Build log sections are empty.
 
 ## Budget mode
 
@@ -18,7 +18,7 @@ Whatever the Spec's Budget section already records (or "not yet recorded" if the
 
 - [ ] Refuses to build
 - [ ] Says the Spec isn't approved yet
-- [ ] Tells the user to approve it in chat via `/design-brief continue`
+- [ ] Tells the user to finish and approve it via `/design-brief continue` (and `/design-brief continue approved` to approve)
 - [ ] Does not change the Spec's Status
 - [ ] Does not create or modify any canvas nodes
 
