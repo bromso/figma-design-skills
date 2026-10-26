@@ -61,7 +61,7 @@ Every prompt to the Figma agent spends AI credits from your monthly seat allowan
 - Figma Specs are in open beta; if the agent can't create one in your file, the skills fall back to a locked text frame named `Spec — <topic>` in a `— Specs —` section, with the same sections and Status line.
 - Prototyping and interactions are not supported yet; `/add-prototype` stays unpublished until they are.
 - Motion generation is gated per Figma account; `/add-motion` checks availability first and stops with a clear message if it isn't enabled; in `/design-build` the motion steps are blocked and the run continues.
-- The upload size limit for custom skills is untested until Probe 1 in `tests/README.md` is run; `skills.config.json`'s `maxBytes` may need adjusting afterward.
+- The upload size limit for custom skills is at least 40 000 bytes (Probe 1, 2026-10-26); `skills.config.json` caps assembled skills at 36 000. Skill text is per-run context that costs credits, so the partials keep tighter budgets anyway.
 
 ## Development
 

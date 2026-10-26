@@ -10,6 +10,8 @@ Three things to test before trusting any scenario result, in this order. Each pr
 
 Upload the two largest real skills first, `dist/design-brief.md` and `dist/design-build.md`, via *Add context → Skills → Upload a file*. If both are accepted, upload dummy skills of 20 000 and then 40 000 bytes to find the ceiling, and record the largest accepted size and the exact error text Figma shows for any rejected one. If either real file is rejected, record the exact error text and the largest size that was accepted. Then set `maxBytes` in `skills.config.json` to the largest accepted size minus 10%.
 
+**Result (2026-10-26, Professional plan, web app):** `dist/design-brief.md` (15 951 bytes) was accepted with no error; name, description and instructions parsed correctly from the frontmatter. A 40 000-byte dummy was also accepted, and its instructions were stored in full (509 lines, last line intact in the editor). No ceiling was found. `maxBytes` set to 36 000 (40 000 minus 10 %). The real constraint on size is now credits, not the upload limit, so partials keep their byte budgets.
+
 ### Probe 2: Specs
 
 Ask the agent to create a Spec named `Spec — Probe` with headings Intent, Audience, Status. Then ask it to update Status. Record whether it worked, and where the Spec appeared (a native Figma Spec object, or a text frame, or something else).
